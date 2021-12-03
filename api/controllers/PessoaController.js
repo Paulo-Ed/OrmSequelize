@@ -65,6 +65,66 @@ class PessoaController {
             return res.status(500).json(error.message)
         }
     }
+
+    //Métodos de Matrícula
+
+    static async retornaUmaMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+        try {
+             const umaMatricula = await dataBase.Matriculas.findOne({
+                 where: {
+                     id: Number(matriculaId),
+                     estudante_id: Number(estudanteId)
+                 }
+             })
+             return res.status(200).json(umaMatricula)
+         }
+        catch (error) {
+             return res.status(500).json(error.message)
+        }
+     }
+     
+     static async criaUmaMatricula(req, res){
+        const { estudanteId } = req.params
+        const novaMatricula = { ...req.body, estudante_id: Number(estudanteId) }
+        try {
+            const novaMatriculaCriada = await dataBase.Matriculas.create(novaMatricula)
+            return res.status(200).json(novaMatriculaCriada)
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async atualizaMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+        const novasInformacoes = req.body
+        try {
+            await dataBase.Matriculas.update(novasInformacoes, {
+                where: {
+                    id: Number(matriculaId),
+                    estudante_id: Number(estudanteId)
+
+                }
+            })
+            const matriculaAtualizada = await dataBase.Matriculas.findOne({where: { id: Number(matriculaId)}})
+            return res.status(200).json(matriculaAtualizada)
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+    
+    static async apagaMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+        try {
+            await dataBase.Matricula.destroy({where: { id: Number(matriculaId) }})
+            return res.status(200).json(`Registro ${matriculaId} Apagado com Sucesso`)
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
 }
 
 module.exports = PessoaController
