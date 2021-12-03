@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 const turmas = require('./turmas');
 module.exports = (sequelize, DataTypes) => {
   class Matriculas extends Model {
