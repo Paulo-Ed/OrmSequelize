@@ -18,3 +18,9 @@ router.put('/pessoas/:id', PessoaController.atualizaPessoa)
 //Deleta o registro de uma pessoa
 router.delete('/pessoas/:id', PessoaController.apagaPessoa)
 module.exports = router
+
+//Rotas Matrícula
+router.get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.retornaUmaMatricula)
+router.post('/pessoas/:estudanteId/matricula/', PessoaController.criaUmaMatricula)
+router.put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.atualizaMatricula)
+router.delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.apagaMatricula)
