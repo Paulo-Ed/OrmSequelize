@@ -53,7 +53,7 @@ class TurmaController {
          }
      }
      //Apaga Registro de Turma
-     static async apagaTurma(req, res){
+    static async apagaTurma(req, res){
          const { id } = req.params
          try {
              await dataBase.Turmas.destroy({where: { id: Number(id) }})
@@ -62,7 +62,18 @@ class TurmaController {
          catch (error) {
              return res.status(500).json(error.message)
          }
-     }
+    }
+
+    //Restaura Turma
+    static async restauraTurma(req, res) {
+        const { id } = req.params
+        try {
+            await dataBase.Turmas.restore( {where: { id: Number(id)}})
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
 }
 
 module.exports = TurmaController

@@ -1,10 +1,20 @@
 const dataBase = require('../models')
 
 class PessoaController {
+    //Retorna todas as Pessoas Ativas
+    static async retornaPessoasAtivas(req, res){
+        try {
+            const pessoasAtivas = await dataBase.Pessoas.findAll()
+        return res.status(200).json(pessoasAtivas)
+        }
+        catch (error){
+        return res.status(500).json(error.message)
+        }
+    }
     //Retorna todas as Pessoas
     static async retornaTodasAsPessoas(req, res){
         try {
-            const todasAsPessoas = await dataBase.Pessoas.findAll()
+            const todasAsPessoas = await dataBase.Pessoas.scope('todos').findAll()
         return res.status(200).json(todasAsPessoas)
         }
         catch (error){
@@ -66,6 +76,18 @@ class PessoaController {
         }
     }
 
+    //Restaura Pessoa
+    static async restauraPessoa(req, res) {
+        const { id } = req.params
+        try {
+            await dataBase.Pessoas.restore({where: {id: Number(id)}})
+            return res.status(200).json( { mensagem: `id ${id} restaurado`})
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
     //Métodos de Matrícula
 
     static async retornaUmaMatricula(req, res){
@@ -120,6 +142,21 @@ class PessoaController {
         try {
             await dataBase.Matricula.destroy({where: { id: Number(matriculaId) }})
             return res.status(200).json(`Registro ${matriculaId} Apagado com Sucesso`)
+        }
+        catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async restauraMatricula(req, res) {
+        const { estudanteId, matriculaId } =  req.params
+        try {
+            await dataBase.Matriculas.restore({
+                where: {
+                    id: Number(matriculaId),
+                    estudante_id: Number(estudanteId)
+                }
+            })
         }
         catch (error) {
             return res.status(500).json(error.message)
