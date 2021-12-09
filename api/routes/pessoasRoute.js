@@ -12,6 +12,9 @@ router.get('/pessoas/todos', PessoaController.retornaTodasAsPessoas)
 //Retorna uma pessoa com o id informado
 router.get('/pessoas/:id', PessoaController.retornaUmaPessoa)
 
+//Retorna as matriculas de uma pessoa
+router.get('/pessoas/:estudanteId/matricula', PessoaController.retornaMatricula)
+
 //Adiciona uma nova pessoa
 router.post('/pessoas', PessoaController.criaPessoa)
 
