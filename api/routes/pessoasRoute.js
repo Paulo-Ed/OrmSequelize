@@ -34,6 +34,7 @@ router.get('/pessoas/matricula/:turmaId/confirmadas', PessoaController.retornaMa
 router.get('/pessoas/matricula/lotada', PessoaController.retornaTurmasLotadas)
 router.post('/pessoas/:estudanteId/matricula/', PessoaController.criaUmaMatricula)
 router.post('/pessoas/:estudanteId/matricula/:matriculaId/restaura', PessoaController.restauraMatricula)
+router.post('/pessoas/:estudanteId/cancela', PessoaController.cancelaPessoa)
 router.put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.atualizaMatricula)
 router.delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.apagaMatricula)
 
