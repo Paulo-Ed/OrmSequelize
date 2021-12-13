@@ -4,10 +4,10 @@ const PessoaController = require('../controllers/PessoaController')
 const router = Router()
 
 //Retorna as pessoas ativas
-router.get('/pessoas', PessoaController.retornaPessoasAtivas)
+router.get('/pessoas', PessoaController.retornaTodasAsPessoas)
 
 //Retorna as pessoas 
-router.get('/pessoas/todos', PessoaController.retornaTodasAsPessoas)
+router.get('/pessoas/ativas', PessoaController.retornaPessoasAtivas)
 
 //Retorna uma pessoa com o id informado
 router.get('/pessoas/:id', PessoaController.retornaUmaPessoa)
